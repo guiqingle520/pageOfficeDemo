@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Excel</title>
+  <script type="text/javascript" src="/pageoffice.js" ></script>
+  <script type="text/javascript">
+    function Save() {
+      document.getElementById("PageOfficeCtrl1").WebSave();
+    }
+
+    function ShowPrintDialog(){
+      document.getElementById("PageOfficeCtrl1").showDialog(4);
+    }
+
+    function SwitchFullScreen(){
+      document.getElementById("PageOfficeCtrl1").FullScreen = !document.getElementById("PageOfficeCtrl1").FullScreen;
+    }
+
+    function Close() {
+      window.external.close();
+    }
+  </script>
+</head>
+<body>
+<div style="width:1000px;height:700px;" th:utext="${pageoffice}"> </div>
+
+<a href="javascript:POBrowser.openWindowModeless('excel','width=1200px;height=800px;');">打开Excel文件</a>
+</body>
+</html>

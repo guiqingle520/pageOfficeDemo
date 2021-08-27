@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试文件并发操作</title>
+    <script type="text/javascript" src="/pageoffice.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+
+        function openClick(id){
+            $.ajax({
+                type: "post",
+                dataType: "html",
+                url: '/pageController/concurrencyWord',
+                data: {id:id},
+                success: function (data) {
+
+                },
+                error: function (data){
+                    alert(111);
+                }
+            });
+            POBrowser.openWindowModeless('concurrencyWord?'+id,'width=1200px;height=800px;');
+        }
+
+    </script>
+</head>
+<body>
+    <form id="form1" >
+        <div style=" border:solid 1px RoyalBlue; width:600px; text-align:center;  height:200px; margin:100px auto;">
+            <div style="margin-top: 50px;height: 170px;">
+                <span style="color: #FF0000;">操作说明：</span>
+                <span>
+                    首先点击“张三打开文件”会在弹出窗口中打开Word文档（不要关闭窗口），<br/>
+                    再点击“李四打开文件”，查看并发控制效果
+                </span>
+                <br/><br/>
+                1:<a href="#" onclick="openClick('1')">张三打开文件</a>
+                <br/><br/>
+                2:<a href="#" onclick="openClick('2')">李四打开文件</a>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

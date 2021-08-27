@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>submitExcel</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <script type="text/javascript" src="/pageoffice.js" ></script>
+    <script type="text/javascript">
+        function save(){
+          document.getElementById("PageOfficeCtrl1").WebSave();
+            document.getElementById("PageOfficeCtrl1").Alert("保存成功，返回值为：" + document.getElementById("PageOfficeCtrl1").CustomSaveResult);
+        }
+    </script>
+</head>
+<body>
+    <!--加载PageOffice控件失败-->
+    <div th:if="${#strings.contains(pageOffice,'加载PageOffice控件失败')}">
+
+      <div style="width:1150px;height:700px;" th:utext="${pageOffice}" hidden="hidden"></div>
+      <a href="javascript:POBrowser.openWindowModeless('submitExcel','width=1200px;height=800px;');">打开文件</a>
+    </div>
+    <div th:unless="${#strings.contains(pageOffice,'加载PageOffice控件失败')}">
+      <div style="width:1150px;height:700px;" th:utext="${pageOffice}"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word</title>
+    <script type="text/javascript" src="/pageoffice.js" ></script>
+    <script type="text/javascript">
+        /**
+         *保存
+         */
+        function Save() {
+
+            //校验
+
+
+            document.getElementById("PageOfficeCtrl1").WebSave();
+            //document.getElementById("PageOfficeCtrl1").CustomSaveResult获取的是保存页面的返回值
+   //         document.getElementById("PageOfficeCtrl1").Alert("保存成功，返回值为：" + document.getElementById("PageOfficeCtrl1").CustomSaveResult);
+
+        }
+
+        /**
+         * 打印
+         * @constructor
+         */
+        function ShowPrintDialog(){
+            // 1:打开   2:保存   3:另存为   4:打印   5:打印设置   6:文件属性
+            document.getElementById("PageOfficeCtrl1").showDialog(4);
+        }
+
+        /**
+         * 全屏切换
+         * @constructor
+         */
+        function SwitchFullScreen(){
+            document.getElementById("PageOfficeCtrl1").FullScreen = !document.getElementById("PageOfficeCtrl1").FullScreen;
+        }
+
+        /**
+         * 关闭
+         * @constructor
+         */
+        function Close() {
+            window.external.close();
+        }
+
+
+        function AfterDocumentOpened(){
+            //3.保存按钮，4.另存为按钮，5.打印按钮，6.页面设置按钮
+            document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(3, false); // 禁止保存
+            document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(4, false); // 禁止另存
+            document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(5, false); //禁止打印
+            document.getElementById("PageOfficeCtrl1").SetEnableFileCommand(6, false); // 禁止页面设置
+        }
+        //文档关闭前先提示用户是否保存
+        function BeforeBrowserClosed() {
+            if (document.getElementById("PageOfficeCtrl1").IsDirty) {
+                if (confirm("提示：文档已被修改，是否继续关闭放弃保存 ？")) {
+                    return true;
+
+                } else {
+
+                    return false;
+                }
+
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+    <!--加载PageOffice控件失败-->
+    <div th:if="${#strings.contains(pageoffice,'加载PageOffice控件失败')}">
+
+        <div style="width:1150px;height:700px;" th:utext="${pageoffice}" hidden="hidden"></div>
+        <a href="javascript:POBrowser.openWindowModeless('submitWord','width=1200px;height=800px;');">打开文件</a>
+    </div>
+    <div th:unless="${#strings.contains(pageoffice,'加载PageOffice控件失败')}">
+        <div style="width:1150px;height:700px;" th:utext="${pageoffice}"></div>
+    </div>
+</body>
+</html>

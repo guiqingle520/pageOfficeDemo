@@ -118,7 +118,7 @@ public class PageController {
      */
     @RequestMapping(value = "/save")
     public void saveFile(HttpServletRequest request, HttpServletResponse response){
-        System.out.println("1111");
+        System.out.println("2222");
         FileSaver fs = new FileSaver(request, response);
         fs.saveToFile("d:\\" + fs.getFileName());
         fs.setCustomSaveResult("ok");//设置保存结果

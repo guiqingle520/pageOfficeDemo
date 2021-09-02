@@ -67,6 +67,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/pageoffice5.2.0.8.jar</systemPath>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.4.1</version>
+        </dependency>
 
     </dependencies>
 
